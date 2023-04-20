@@ -1,0 +1,17 @@
+<odoo>
+  <data>
+
+    <record id="vpas_invoice_report" model="ir.actions.report">
+        <field name="name">Factura</field>
+        <field name="model">account.move</field>
+        <field name="binding_model_id" ref="account.model_account_move"/>
+        <field name="binding_type">report</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">vpas_invoice.vpas_invoice</field>
+        <field name="report_file">vpas_invoice.vpas_invoice</field>
+        <field name="print_report_name">'Factura - %s' % (object.name)</field>
+        <field name="paperformat_id" ref="vpas_invoice_paperformat"/>
+    </record>
+    
+  </data>
+</odoo>

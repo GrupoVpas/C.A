@@ -1,0 +1,1 @@
+from . import vpas_invoice
