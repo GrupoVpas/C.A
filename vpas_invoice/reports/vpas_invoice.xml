@@ -11,13 +11,13 @@
                             <div class="oe_structure"/>
                             <div class="row">
                                 <div class="col-8 text-left">
-                                    <span>Codigo: </span>
+                                    <span>Código: </span>
                                     <span t-field="o.partner_id.vat"/>
                                     <br/>
                                     <span>Cliente: </span>
                                     <span t-field="o.partner_id.name"/>
                                     <br/>
-                                    <span>Direccion: </span>
+                                    <span>Dirección: </span>
                                     <span t-esc="address"/>
                                     <br/>
                                     <span>RIF: </span>
@@ -26,7 +26,7 @@
                                     <span>Telefonos: </span>
                                     <span t-field="o.partner_id.phone"/>
                                     <br/>
-                                    <span>Direccion de Envio: </span>
+                                    <span>Dirección de Envío: </span>
                                     <span t-esc="billing_address"/>
                                 </div>
                                 <div class="col-4">
@@ -53,7 +53,7 @@
                                     <span t-field="o.invoice_date"/>
                                     <br/>
                                     <span>Fecha de Vencimiento: </span>
-                                    <span t-field="o.invoice_date"/>
+                                    <span t-field="o.invoice_date_due"/>
                                 
                                 </div>
                             </div>
@@ -62,71 +62,38 @@
                                 <table class="table table-sm table-borderless" name="invoice_line_table">
                                     <thead style="border-top: 1pt solid black; border-bottom: 1pt solid black;">
                                         <tr>
-                                            <th name="th_description" class="text-left"><span>Descripcion</span></th>
-                                            <th name="th_quantity" class="text-left"><span>Unidad</span></th>
-                                            <th name="th_kilos" class="text-left"><span>Kilos</span></th>
-                                            <th name="th_quantity" class="text-left"><span>Cantidad</span></th>
-                                            <th name="th_priceunit" class="text-right"><span>Precio por Unidad</span></th>
-                                            <th name="th_subtotal" colspan="2" class="text-right"><span>Total</span></th>
+                                            <th name="th_description" style="text-align: left"><span>Descripción</span></th>
+                                            <th name="th_quantity" style="text-align: left"><span>Unidad</span></th>
+                                            <th name="th_kilos" style="text-align: right"><span>Kilos</span></th>
+                                            <th name="th_quantity" style="text-align: right"><span>Cantidad</span></th>
+                                            <th name="th_priceunit" style="text-align: right"><span>Precio por Unidad</span></th>
+                                            <th name="th_subtotal" style="text-align: right"><span>Total</span></th>
                                         </tr>
                                     </thead>
                                     <tbody class="invoice_tbody">
                                         <t t-foreach="lines" t-as="line">
-                                            <!-- <t t-if="not line['display_type']"> -->
-                                                <tr>
-                                                    <td class="text-left">
-                                                        <span t-esc="line['name']"/>
-                                                    </td>
-                                                    <td class="text-left">
-                                                        <span t-esc="line['product_uom_id']"/>
-                                                    </td>
-                                                    <td class="text-left">
-                                                        <span t-esc="line['kilos']"/>
-                                                    </td>
-                                                    <td class="text-left">
-                                                        <span t-esc="line['quantity']"/>
-                                                    </td>
-                                                    <td class="text-right">
-                                                        <span t-esc="line['price_unit']"/>
-                                                    </td>
-                                                    <td class="text-right">
-                                                        <span t-esc="line['price_subtotal']"/>
-                                                    </td>
-                                                </tr>
-                                            <!-- </t>
-                                            <t t-else="">
-                                                 <tr>
-                                                    <td class="text-left" colspan="6">
-                                                        <span t-esc="line['name']"/>
-                                                    </td>
-                                                </tr>
-                                            </t> -->
-                                        </t>
-                                        <!-- <t t-if="o.reversed_entry_id">
+
                                             <tr>
-                                                <td class="text-left"/>
-                                                <td class="text-left">
-                                                    <t t-if="o.x_tipodoc == 'Nota de Crédito'">
-                                                        <span>N/C </span>
-                                                    </t>
-                                                    <t t-elif="o.x_tipodoc == 'Nota de Débito'">
-                                                        <span>N/D </span>
-                                                    </t>
-                                                    <t t-else="">
-                                                        <span>FACTURA</span>
-                                                    </t>
-                                                    <span>APLICA A FACT </span>
-                                                    <span t-field="o.reversed_entry_id.ref"/>
-                                                    <span> DEL </span>
-                                                    <span t-field="o.reversed_entry_id.invoice_date"/>
-                                                    <span> EMITIDA POR UN MONTO TOTAL DE </span>
-                                                    <span t-esc="amount_total"/>
-                                                    <span t-if="o.currency_id.name == 'USD'"> USD</span>
-                                                    <span t-if="o.currency_id.name == 'VES'"> Bs</span>
+                                                <td style="text-align: left">
+                                                    <span t-esc="line['name']"/>
                                                 </td>
-                                                <td class="text-left" colspan="4"/>
+                                                <td style="text-align: left">
+                                                    <span t-esc="line['product_uom_id']"/>
+                                                </td>
+                                                <td style="text-align: right">
+                                                    <span t-esc="line['kilos']"/>
+                                                </td>
+                                                <td style="text-align: right">
+                                                    <span t-esc="line['quantity']"/>
+                                                </td>
+                                                <td style="text-align: right">
+                                                    <span t-esc="line['price_unit']"/>
+                                                </td>
+                                                <td style="text-align: right">
+                                                    <span t-esc="line['price_subtotal']"/>
+                                                </td>
                                             </tr>
-                                        </t> -->
+                                        </t>
                                     </tbody>
                                 </table>
                             </div>
@@ -135,8 +102,8 @@
                                 <div class="col-6">
                                     <div t-if="o.currency_id.name == 'USD'">
                                         <p>
-                                            El monto de <span t-esc="amount_total"/> en Dolares equivale al <span t-esc="total_rate_amount"/> al tipo de cambio de 
-                                            Bs por <span t-field="o.x_tasa" t-options='{"widget": "float", "precision": 4}'/> 
+                                            El monto de <span t-esc="amount_total"/> en Dolares equivale a <span t-esc="total_rate_amount"/> Bs al tipo de cambio 
+                                            <span t-field="o.x_tasa" t-options='{"widget": "float", "precision": 4}'/> Bs por
                                             Dolar fijado por el B.C.V al dia <span t-field="o.invoice_date"/>.
                                         </p>
                                     </div>
@@ -146,15 +113,14 @@
                                 <div class="col-5">
                                     <div class="clearfix">
                                         <div id="total" class="row">
-<!--                                            <table class="table table-sm" style="page-break-inside: avoid; line-height: 100%">-->
                                             <table class="table table-sm table-borderless" style="page-break-inside: avoid;">
                                                 <tr class="border-black o_subtotal">
-                                                    <td>
+                                                    <td style="text-align: left">
                                                         <strong>Sub-Total </strong>
                                                         <strong t-if="o.currency_id.name == 'USD'">USD</strong>
                                                         <strong t-if="o.currency_id.name == 'VES'">Bs</strong>
                                                     </td>
-                                                    <td class="text-right">
+                                                    <td style="text-align: right">
                                                         <span
                                                             t-att-class="oe_subtotal_footer_separator"
                                                             t-esc="subtotal"
@@ -163,12 +129,12 @@
                                                 </tr>
 
                                                 <tr>
-                                                    <td>
+                                                    <td style="text-align: left">
                                                         <strong>Descuento Financiero </strong>
                                                         <strong t-if="o.currency_id.name == 'USD'">USD</strong>
                                                         <strong t-if="o.currency_id.name == 'VES'">Bs</strong>
                                                     </td>
-                                                    <td class="text-right">
+                                                    <td style="text-align: right">
                                                         <span
                                                             t-att-class="oe_subtotal_footer_separator"
                                                             t-esc="descuento"
@@ -177,12 +143,12 @@
                                                 </tr>
 
                                                 <tr>
-                                                    <td>
+                                                    <td style="text-align: left">
                                                         <strong>Base Imponible</strong>
                                                         <strong t-if="o.currency_id.name == 'USD'">USD</strong>
                                                         <strong t-if="o.currency_id.name == 'VES'">Bs</strong>
                                                     </td>
-                                                    <td class="text-right">
+                                                    <td style="text-align: right">
                                                         <t t-if="tax_base">
                                                             <span
                                                                 t-att-class="oe_subtotal_footer_separator"
@@ -196,12 +162,12 @@
                                                 </tr>
 
                                                 <tr>
-                                                    <td>
+                                                    <td style="text-align: left">
                                                         <strong>I.V.A </strong><strong t-esc="porcentaje"/><strong>%</strong>
                                                         <strong t-if="o.currency_id.name == 'USD'">USD</strong>
                                                         <strong t-if="o.currency_id.name == 'VES'">Bs</strong>
                                                     </td>
-                                                    <td class="text-right">
+                                                    <td style="text-align: right">
                                                         <t t-if="tax_iva">
                                                             <span
                                                                 t-att-class="oe_subtotal_footer_separator"
@@ -215,12 +181,12 @@
                                                 </tr>
 
                                                 <tr class="border-black o_total">
-                                                    <td>
+                                                    <td style="text-align: left">
                                                         <strong>Total Factura</strong>
                                                         <strong t-if="o.currency_id.name == 'USD'">USD</strong>
                                                         <strong t-if="o.currency_id.name == 'VES'">Bs</strong>
                                                     </td>
-                                                    <td class="text-right">
+                                                    <td style="text-align: right">
                                                         <span
                                                             t-att-class="oe_subtotal_footer_separator"
                                                             t-esc="amount_total"
@@ -232,9 +198,7 @@
                                     </div>
                                 </div>
                             </div>
-                        
                         </div>
-                        
                     </t>
                 </t>
             </t>
