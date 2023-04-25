@@ -11,22 +11,22 @@
                             <div class="oe_structure"/>
                             <div class="row">
                                 <div class="col-8 text-left">
-                                    <span>Código: </span>
+                                    <strong>Código: </strong>
                                     <span t-field="o.partner_id.vat"/>
                                     <br/>
-                                    <span>Cliente: </span>
+                                    <strong>Cliente: </strong>
                                     <span t-field="o.partner_id.name"/>
                                     <br/>
-                                    <span>Dirección: </span>
+                                    <strong>Dirección: </strong>
                                     <span t-esc="address"/>
                                     <br/>
-                                    <span>RIF: </span>
+                                    <strong>RIF: </strong>
                                     <span t-field="o.partner_id.vat"/>
                                     <br/>
-                                    <span>Telefonos: </span>
+                                    <strong>Telefonos: </strong>
                                     <span t-field="o.partner_id.phone"/>
                                     <br/>
-                                    <span>Dirección de Envío: </span>
+                                    <strong>Dirección de Envío: </strong>
                                     <span t-esc="billing_address"/>
                                 </div>
                                 <div class="col-4">
@@ -45,14 +45,14 @@
                                         </t>
                                     </div>
                                     <br/>
-                                    <span t-field="o.ref"/>
+                                    <strong t-field="o.ref"/>
                                     <br/>
                                     <br/>
                                     
-                                    <span>Fecha de Factura: </span>
+                                    <strong>Fecha de Factura: </strong>
                                     <span t-field="o.invoice_date"/>
                                     <br/>
-                                    <span>Fecha de Vencimiento: </span>
+                                    <strong>Fecha de Vencimiento: </strong>
                                     <span t-field="o.invoice_date_due"/>
                                 
                                 </div>
