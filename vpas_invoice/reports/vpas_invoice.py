@@ -131,7 +131,7 @@ class VpasInvoice(models.AbstractModel):
             'docs': docs,
             'address': self.address_format(docs.partner_id),
             # 'billing_address': self.address_format(docs.x_studio_direccin_de_envo) if docs.x_studio_direccin_de_envo else self.address_format(docs.partner_id),
-            'billing_address': self.address_format(docs.partner_id.partner_shipping_id),
+            'billing_address': self.address_format(docs.partner_shipping_id),
             'subtotal': locale.format_string('%10.2f', subtotal, grouping=True),
             'descuento': locale.format_string('%10.2f', descuento, grouping=True),
             'tax_base': locale.format_string('%10.2f', tax_base, grouping=True),
