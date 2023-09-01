@@ -1,0 +1,6 @@
+<?xml version="1.0"?>
+<odoo>
+	
+	<menuitem id="menu_payment_allocation_reconciliation" action="act_account_payment_allocation_reconciliation" parent="account.menu_finance_entries_actions" sequence="25" />
+
+</odoo>

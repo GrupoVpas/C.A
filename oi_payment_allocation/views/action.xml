@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="act_account_payment_allocation" model="ir.actions.act_window">
+		<field name="name">Payment Allocation</field>
+		<field name="res_model">account.payment.allocation</field>
+		<field name="view_mode">form</field>
+		<field name="target">new</field>
+		<field name="binding_model_id" ref="account.model_account_payment" />
+		<field name="binding_type">action</field>
+	</record>
+
+	<record id="act_account_payment_allocation_invoice" model="ir.actions.act_window">
+		<field name="name">Payment Allocation</field>
+		<field name="res_model">account.payment.allocation</field>
+		<field name="view_mode">form</field>
+		<field name="target">new</field>
+		<field name="binding_model_id" ref="account.model_account_move" />
+		<field name="binding_type">action</field>
+	</record>
+		
+	<record id="act_account_move_line_reconcile" model="ir.actions.act_window">
+		<field name="name">Reconcile</field>
+		<field name="res_model">account.payment.allocation</field>
+		<field name="view_mode">form</field>
+		<field name="target">new</field>
+		<field name="binding_model_id" ref="account.model_account_move_line" />
+		<field name="binding_type">action</field>
+	</record>	
+	
+	
+	<record id="act_account_payment_allocation_reconciliation" model="ir.actions.act_window">
+		<field name="name">Payment Allocation / Reconciliation</field>
+		<field name="res_model">account.payment.allocation</field>
+		<field name="view_mode">form</field>
+		<field name="target">new</field>
+	</record>	
+
+	<record id="act_view_partial_reconcile" model="ir.actions.act_window">
+		<field name="name">View Partial Reconcile</field>
+		<field name="res_model">account.partial.reconcile</field>
+		<field name="view_mode">tree,form</field>
+		<field name="binding_model_id" ref="account.model_account_move" />
+		<field name="binding_type">action</field>
+		<field name="domain">['|', ('debit_move_id.move_id','in', active_ids), ('credit_move_id.move_id','in', active_ids)]</field>
+		<field name="groups_id" eval="[(4, ref('base.group_no_one'))]" />
+		<field name="context">{'form_view_initial_mode' : 'readonly'}</field>
+	</record>
+	
+	<record id="act_view_partial_reconcile_payment" model="ir.actions.act_window">
+		<field name="name">View Partial Reconcile</field>
+		<field name="res_model">account.partial.reconcile</field>
+		<field name="view_mode">tree,form</field>
+		<field name="binding_model_id" ref="account.model_account_payment" />
+		<field name="binding_type">action</field>
+		<field name="domain">['|', ('debit_move_id.payment_id','in', active_ids), ('credit_move_id.payment_id','in', active_ids)]</field>
+		<field name="groups_id" eval="[(4, ref('base.group_no_one'))]" />
+		<field name="context">{'form_view_initial_mode' : 'readonly'}</field>
+	</record>
+		
+</odoo>
