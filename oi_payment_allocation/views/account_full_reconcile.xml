@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+        <record id="view_account_full_reconcile_form" model="ir.ui.view">
+            <field name="name">account.full.reconcile.form</field>
+            <field name="model">account.full.reconcile</field>
+            <field name="priority">10</field>
+            <field name="arch" type="xml">
+            	<form create="false" delete="false" edit="false">
+            		<sheet>
+            			<div class="oe_title">
+            				<h1><field name="name" /></h1>
+            			</div>
+            			<group string="Reconciliation Parts">
+	                        <field name="partial_reconcile_ids" readonly="1" colspan="2" nolabel="1">
+	                        	<tree>
+	                        		<field name="debit_move_id" />
+	                        		<field name="debit_currency_id" optional="hide" />
+	                        		<field name="debit_amount_currency" sum="Total Debit Amount Currency" />
+	                        		<field name="credit_move_id" />
+	                        		<field name="credit_currency_id" optional="hide" />
+	                        		<field name="credit_amount_currency" sum="Total Credit Amount Currency"/>
+	                        		
+	                        		<field name="amount" sum="Total Amount"/>
+	                        		<field name="company_currency_id" optional="hide" />
+	                        		<field name="exchange_move_id" optional="show"/>
+	                        	</tree>
+	                        </field>            			
+            			</group>
+            			<group string="Matched Journal Items">
+            				<field name="reconciled_line_ids" readonly="1" colspan="2" nolabel="1"/>
+            			</group>
+            		</sheet>
+            	</form>
+            </field>
+        </record>
+
+</odoo>

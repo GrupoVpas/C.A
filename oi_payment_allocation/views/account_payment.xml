@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="view_account_payment_search" model="ir.ui.view">
+		<field name="name">account.payment.search</field>
+		<field name="model">account.payment</field>
+		<field name="inherit_id" ref="account.view_account_payment_search" />
+		<field name="arch" type="xml">
+			<filter name="reconciled" position="after">
+				<filter string="Unreconciled" name="not_reconciled" domain="[('is_reconciled', '=', False)]"/>
+			</filter>
+		</field>
+		
+	</record>
+		
+</odoo>

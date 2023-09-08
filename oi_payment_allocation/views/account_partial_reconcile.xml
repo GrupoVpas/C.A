@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+	<record id="view_account_partial_reconcile_tree" model="ir.ui.view">
+		<field name="name">account.partial.reconcile.tree</field>
+		<field name="model">account.partial.reconcile</field>
+		<field name="arch" type="xml">
+			<tree create="false" delete="false">
+				<field name="debit_move_id" />
+				<field name="credit_move_id" />
+				<field name="full_reconcile_id" />
+				<field name="amount" sum="Total" />
+				<field name="debit_amount_currency" sum="Total" />
+				<field name="credit_amount_currency" sum="Total" />
+				<field name="max_date" />
+				<field name="company_currency_id" invisible="1" />
+				<field name="debit_currency_id" invisible="1" />
+				<field name="credit_currency_id" invisible="1" />
+			</tree>
+		</field>
+		
+	</record>
+	
+	
+</odoo>
