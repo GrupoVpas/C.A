@@ -2,3 +2,7 @@
 	path = tax_report
 	url = git@gitlab.com:addons_arkisoft/tax_report.git
 	branch = 16.0
+[submodule "personalized_ledger"]
+	path = personalized_ledger
+	url = git@gitlab.com:addons_arkisoft/personalized_ledger.git
+	branch = 16.0
