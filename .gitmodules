@@ -2,3 +2,7 @@
 	path = tax_report
 	url = git@gitlab.com:addons_arkisoft/tax_report.git
 	branch = 16.0
+[submodule "api_exchange_rate"]
+	path = api_exchange_rate
+	url = git@gitlab.com:addons_arkisoft/api_exchange_rate.git
+	branch = 16.0
