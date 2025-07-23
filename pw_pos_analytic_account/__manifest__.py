@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 {
     "name": "POS Analytic Account",
-    'version': '1.0',
+    'version': '17.0.0.1',
     'author': 'Preway IT Solutions',
     'category': 'Point of Sale',
     'depends': ['point_of_sale'],

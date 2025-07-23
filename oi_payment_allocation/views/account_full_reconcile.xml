@@ -9,7 +9,7 @@
             	<form create="false" delete="false" edit="false">
             		<sheet>
             			<div class="oe_title">
-            				<h1><field name="name" /></h1>
+            				<h1><field name="display_name" /></h1>
             			</div>
             			<group string="Reconciliation Parts">
 	                        <field name="partial_reconcile_ids" readonly="1" colspan="2" nolabel="1">

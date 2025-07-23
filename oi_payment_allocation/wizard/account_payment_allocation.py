@@ -6,6 +6,7 @@ Created on Oct 20, 2019
 from odoo import models, fields, api, _
 from odoo.exceptions import UserError
 from odoo.fields import Command
+from odoo.osv import expression
 
 class PaymentAllocation(models.TransientModel):
     _name = "account.payment.allocation"
@@ -57,6 +58,7 @@ class PaymentAllocation(models.TransientModel):
     payment_ids = fields.Many2many('account.payment', default = _get_payment)
     invoice_ids = fields.Many2many('account.move', default = _get_invoice)
     move_line_ids = fields.Many2many('account.move.line', default = _get_move_line_ids)
+    active_move_line_ids = fields.Many2many('account.move.line', compute = '_calc_active_move_line_ids')
     
     writeoff_journal_id = fields.Many2one('account.journal', string='Write off Journal')
     writeoff_ref = fields.Char('Write off Reference')
@@ -73,6 +75,19 @@ class PaymentAllocation(models.TransientModel):
     
     max_date = fields.Date(compute = '_calc_max_date')
     manual_currency_rate = fields.Binary(compute = '_calc_manual_currency_rate')
+    
+    @api.depends('payment_ids','invoice_ids', 'move_line_ids')
+    def _calc_active_move_line_ids(self):
+        for record in self:
+            if record.payment_ids:
+                record.active_move_line_ids = record.payment_ids.line_ids
+            elif record.invoice_ids:
+                record.active_move_line_ids = record.invoice_ids.line_ids
+            elif record.move_line_ids:
+                record.active_move_line_ids = record.move_line_ids
+            else:
+                record.active_move_line_ids = False
+                
     
     @api.depends('debit_line_ids.allocate', 'credit_line_ids.allocate', 'line_ids.allocate')
     def _calc_max_date(self):
@@ -162,15 +177,22 @@ class PaymentAllocation(models.TransientModel):
         self.credit_line_ids = False
         
         domain = [('account_id', '=', self.account_id.id), ('reconciled', '=', False), ('company_id', '=', self.company_id.id), ('parent_state','=', 'posted')]
+        filter_domain = []
+        
         if self.date_from:
-            domain.append(('date', '>=', self.date_from))
+            filter_domain.append(('date', '>=', self.date_from))
     
         if self.date_to:
-            domain.append(('date', '<=', self.date_to))
+            filter_domain.append(('date', '<=', self.date_to))
             
         if self.ref:
-            domain.append(('ref', 'ilike', self.ref))
+            filter_domain.append(('ref', 'ilike', self.ref))
         
+        if filter_domain:
+            if self.active_move_line_ids:
+                filter_domain = expression.OR([[('id','in', self.active_move_line_ids.ids)], filter_domain])
+            domain.extend(filter_domain)
+                    
         if self.partner_id:
             if self.show_child:
                 partner_id = self.partner_id
