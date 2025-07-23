@@ -15,7 +15,7 @@ class PaymentAllocationWriteOff(models.TransientModel):
     sequence = fields.Integer()
     currency_id = fields.Many2one(related='allocation_id.currency_id')
     company_id = fields.Many2one(related='allocation_id.company_id')        
-    account_id = fields.Many2one('account.account', required = True, domain="[('deprecated', '=', False), ('company_id', '=', company_id),('is_off_balance', '=', False)]", check_company=True)
+    account_id = fields.Many2one('account.account', required = True, domain="[('deprecated', '=', False), ('company_id', '=', company_id),('account_type','not in', ['asset_receivable','liability_payable','off_balance'])]", check_company=True)
     name = fields.Char(string='Label')
     balance = fields.Monetary('Amount')
     partner_id = fields.Many2one('res.partner')
