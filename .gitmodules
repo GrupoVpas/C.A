@@ -6,3 +6,11 @@
 	path = api_exchange_rate
 	url = git@gitlab.com:addons_arkisoft/api_exchange_rate.git
 	branch = 17.0
+[submodule "delivery_note_report"]
+	path = delivery_note_report
+	url = git@gitlab.com:addons_arkisoft/delivery_note_report.git
+	branch = 17.0
+[submodule "seniat_modifications"]
+	path = seniat_modifications
+	url = git@gitlab.com:addons_arkisoft/seniat_modifications.git
+	branch = 17.0
